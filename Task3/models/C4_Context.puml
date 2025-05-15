@@ -1,0 +1,25 @@
+@startuml C4_Context_PropDevelopment
+
+title С4 Context diagram компании PropDevelopment
+
+!include ../template_C4/C4_Context.puml
+!include ../template_C4/C4_Component.puml
+
+Person(customer, "Собственник", "", $sprite="person")
+Person(admin, "Администратор", "")
+
+System(prop_development, "Система PropDevelopment", "Управление умным домом")
+
+System_Ext(smart_home, "Контур умного дома") {
+    Component(smart_domophone, "Интеллектуальный домофон", "Распознавание пользователей по биометрии")
+    Component(smart_barier, "Интеллектуальный шлагбаум", "Управление шлагбаумом и автоматически открывает доступ")
+}
+
+Rel(customer, prop_development, "Использует при взаимодействии с домофоном/шлагбамом")
+Rel(prop_development, smart_domophone, "запросы на использования систем умного дома")
+Rel(prop_development, smart_barier, "запросы на использования систем умного дома")
+Rel(admin, prop_development, "Администрирование собственника в системе 'Умный дом' у партнеров")
+Rel(customer, prop_development, "Через мобильное приложение регистрирует свою биометрию для домофона, номер машины для шлагбаума")
+
+
+@enduml
